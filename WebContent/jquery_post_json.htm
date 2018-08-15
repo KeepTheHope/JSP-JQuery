@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>jQuery开发框架</title>
+<script type="text/javascript" src="jquery/jquery.min.js"></script>
+<meta charset="UTF-8">
+<script type="text/javascript">
+	$(function() {
+		$(loadBut).on("click",function() {
+			$.post("JSONServlet",{msg:"hello"},function(data){
+				$(pid).text(data.province.pid) ;
+				$(ptitle).text(data.province.title) ;
+				for (x = 0 ; x < data.cities.length ; x ++) {
+					$("#noteDiv table").append("<tr><td>"+data.cities[x].cid+"</td><td>"+data.cities[x].title+"</td></tr>") ;
+				}
+			},"json") ;
+		}) ;
+	})
+</script>
+</head>
+<body>
+	<div>
+		<button id="loadBut">读取信息</button>
+	</div>
+	<div id="noteDiv">
+		<p>省份编号：<span id="pid"></span></p>
+		<p>省份名称：<span id="ptitle"></span></p>
+		<table border="1">
+			<tr><td>城市编号</td><td>城市名称</td></tr>
+		</table>
+	</div>
+</body>
+</html>
